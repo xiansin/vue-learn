@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <p v-for="(item,key,index) in list">
+        item:{{item}}---key：{{key}}---索引：{{index}}
+    </p>
+</div>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            list:{
+                id:1,
+                name:'李白'
+            }
+        },
+        methods:{
+
+        }
+    })
+</script>
+</body>
+</html>
