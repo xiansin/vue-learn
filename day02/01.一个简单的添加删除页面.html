@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../asset/vue.js"></script>
+    <link rel="stylesheet" href="../asset/bootstrap-3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+    <div class="panel panel-primary">
+        <div class="panel-heading">品牌管理</div>
+        <div class="panel-body">
+            <form action="" class="form-inline">
+                <label>
+                    <input type="text" placeholder="ID" class="form-control" v-model="id">
+                </label>
+                <label>
+                    <input type="text" placeholder="name" class="form-control" v-model="name">
+                </label>
+                <button type="button" class="btn btn-primary" @click="add">添加</button>
+                <label>
+                    搜索名称关键字：
+                    <input type="text" class="form-control" placeholder="搜索名称关键字" v-model="keywords">
+                </label>
+            </form>
+        </div>
+    </div>
+    <table class="table table-hover table-bordered table-striped text-center">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in search(keywords)" :key="item.id">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.ctime}}</td>
+            <td>
+                <a href="" @click.prevent="del(item.id)">删除</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            id:'',
+            name:'',
+            keywords:'',
+            list:[
+                {id:1,name:'宝马',ctime:new Date()},
+                {id:2,name:'奔驰',ctime:new Date()},
+            ]
+        },
+        methods:{
+            add(){
+                let car = {id:this.id,name:this.name,ctime:new Date()};
+                this.list.push(car);
+                this.id = this.name = '';
+            },
+            del(id){
+               /*this.list.some((item,index)=>{
+                   if(item.id == id){
+                       this.list.splice(index,1)
+                       return true;
+                   }
+                });*/
+                let index = this.list.findIndex(item=>{
+                    if(item.id == id){
+                        return item;
+                    }
+                });
+                this.list.splice(index,1)
+            },
+            search(keywords){
+                /*let newList = [];
+                this.list.forEach(item=>{
+                    if(item.name.indexOf(keywords) != -1){
+                        newList.push(item);
+                    }
+                });
+                return newList;*/
+               return this.list.filter(item=>{
+                    if(item.name.includes(keywords)){
+                        return item;
+                    }
+                })
+            }
+        }
+    });
+</script>
+</body>
+</html>
