@@ -14,12 +14,25 @@
 <div id="app">
     <!--解决插值表达式 闪烁问题-->
     <p v-cloak>{{msg}}</p>
+    <p v-text="msg"></p>
+    <p v-html="msg1"></p>
+    <!-- v-bind 可以写合法的js表达式 属性绑定 简写:-->
+    <input type="button" value="按钮" :title="myTitle">
+    <!-- v-on 事件绑定机制 简写@-->
+    <input type="button" value="show" @click="show">
 </div>
 <script>
     let app = new Vue({
         el:'#app',
         data:{
-            msg:'123'
+            msg:'123',
+            msg1:'<h1>我是一个标题</h1>',
+            myTitle:'我是一个标题'
+        },
+        methods:{
+            show(){
+                alert("hello")
+            }
         }
     })
 </script>

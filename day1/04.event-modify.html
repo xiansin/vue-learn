@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件修饰符</title>
+    <script src="../vue.js"></script>
+</head>
+<style>
+    div{
+        width: 100%;
+        height: 80px;
+        background: lavender;
+        margin-bottom: 10px;
+    }
+</style>
+<body>
+<div id="app">
+    <div @click="divHandler">
+        <input type="button" value="按钮1" @click="btnHandler">
+        <!-- .stop 阻止冒泡事件-->
+        <input type="button" value="按钮2" @click.stop="btnHandler">
+        <a type="button" href="//baidu.com" @click="linkClick">百度一下</a>
+        <!-- .prevent 阻止默认事件-->
+        <a type="button" href="//baidu.com"  @click.prevent="linkClick">百度一下</a>
+    </div>
+    <!-- .capture 捕获事件-->
+    <div @click.capture="divHandler">
+        <input type="button" value="按钮4" @click="btnHandler">
+    </div>
+    <!-- .self 自身事件 只有作用于自身时才会触发-->
+    <div @click.self="divHandler">
+        <input type="button" value="按钮5" @click="btnHandler">
+    </div>
+    <!-- .once 捕获事件-->
+    <div @click="divHandler">
+        <a type="button" href="//baidu.com"  @click.prevent.once="linkClick">百度一下</a>
+    </div>
+</div>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+        
+        },
+        methods:{
+            divHandler(){
+                console.log("触发div点击事件")
+            },
+            btnHandler(){
+                console.log("触发button点击事件")
+            },
+            linkClick(){
+                console.log("触发a标签点击事件")
+            }
+        }
+    });
+</script>
+</body>
+</html>

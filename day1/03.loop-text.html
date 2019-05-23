@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文字循环</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="开始" @click="start">
+    <input type="button" value="停止" @click="stop">
+    <h4 v-text="msg"></h4>
+</div>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            msg:'我是一串字符~~',
+            intervalId:null
+        },
+        methods:{
+            start(){
+                if(this.intervalId !== null) return true;
+                this.intervalId = setInterval(()=>{
+                    let start = this.msg.substr(0,1);
+                    let end = this.msg.substr(1);
+                    this.msg = end + start;
+                }, 100);
+            },
+            stop(){
+                clearInterval(this.intervalId);
+                this.intervalId = null;
+            }
+        }
+    });
+</script>
+</body>
+</html>
