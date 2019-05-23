@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <input type="text" placeholder="id" v-model="id">
+    <input type="text" placeholder="name" v-model="name">
+    <input type="button" value="添加" @click="add">
+    <p v-for="(item,index) in  list" :key="item.id">
+        <input type="checkbox" name="" id="">
+        id:{{item.id}}---name:{{item.name}}---索引{{index}}</p>
+</div>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            id:null,
+            name:null,
+            list:[
+                {id:1,name:'李白'},
+                {id:2,name:'白居易'},
+                {id:3,name:'杜甫'},
+            ]
+        },
+        methods:{
+            add(){
+                this.list.unshift({id:this.id,name:this.name});
+            }
+        }
+    })
+</script>
+</body>
+</html>

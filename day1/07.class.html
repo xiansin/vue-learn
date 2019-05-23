@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定样式</title>
+    <script src="../vue.js"></script>
+</head>
+<style>
+    .red{
+        color: red;
+    }
+    .thin{
+        font-weight: 200;
+    }
+    .italic{
+        font-style: italic;
+    }
+    .active{
+        letter-spacing: 0.2em;
+    }
+</style>
+<body>
+<div id="app">
+    <!--可以使用v-bind 三元表达式-->
+    <h2 :class="['red','thin',flag?'active':'']">这是一个大标题</h2>
+    <!--也可以使用对象来简化代码-->
+    <h2 :class="['red','thin',{'active':flag}]">这是一个大标题</h2>
+    <!--也可以完全是一个对象-->
+    <h2 :class="{red:true,thin:false,italic:false,active:flag}">这是一个大标题</h2>
+    <!--内联样式-->
+    <h2 :style="{red:true,thin:false,'font-size':'40px'}">这是一个大标题</h2>
+</div>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            flag:true
+        },
+        method:{
+
+        }
+    })
+</script>
+</body>
+</html>

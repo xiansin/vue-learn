@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简易计算器</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="n1">
+    <select name="" id="" v-model="opt">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="text" v-model="n2">
+    <input type="button" value="=" @click="calc">
+    <input type="text" v-model="result">
+</div>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            n1:'',
+            n2:'',
+            result:'',
+            opt:'+'
+        },
+        methods:{
+            calc(){
+                let string = `parseInt(this.n1)${this.opt}parseInt(this.n2)`;
+                this.result = eval(string);
+            }
+        }
+    });
+</script>
+</body>
+</html>
